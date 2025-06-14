@@ -1,0 +1,61 @@
+import java.util.Scanner;
+import java.util.Random;
+class numbergame 
+{
+    static void startgame()
+    {
+        Scanner sc = new Scanner(System.in);
+        Random rand = new Random();
+        int maxAttempts = 7;
+        int score = 0;
+        String playAgain;
+        do {
+            int number = rand.nextInt(100) + 1;
+            int attempts = 0;
+            boolean guessed = false;
+            System.out.println("guess the number between 1 and 100");
+            while (attempts < maxAttempts)
+            {
+                System.out.print("enter your guess: ");
+                int guess;
+                try
+                {
+                    guess = Integer.parseInt(sc.nextLine());
+                }
+                catch (NumberFormatException e)
+                {
+                    System.out.println("please enter a valid number");
+                    continue;
+                }
+                attempts++;
+                if (guess == number)
+                {
+                    System.out.println("correct! you guessed it in " + attempts + " tries");
+                    score++;
+                    guessed = true;
+                    break;
+                } else if (guess < number)
+                {
+                    System.out.println("too low");
+                }
+                else
+                {
+                    System.out.println("too high");
+                }
+                if (attempts == maxAttempts)
+                {
+                    System.out.println("you've used all attempts. the number was " + number);
+                }
+            }
+            System.out.print("do you want to play again? (yes/no): ");
+            playAgain = sc.nextLine().toLowerCase();
+        }
+        while (playAgain.equals("yes"));
+        System.out.println("your total score is: " + score);
+        sc.close();
+    }
+    public static void main(String[] args)
+    {
+        startgame();
+    }
+}
