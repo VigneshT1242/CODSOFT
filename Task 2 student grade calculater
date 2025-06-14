@@ -1,0 +1,49 @@
+import java.util.*;
+class mrks
+{
+  public static void main(String args[])
+  {
+      Scanner sc=new Scanner(System.in);
+      System.out.println("enter number of subjects");
+      int x=sc.nextInt();
+      int marks[]=new int [x];
+      System.out.println("enter the marks of each subject (out of 100)");
+      for(int i=0;i<x;i++)
+      {
+          marks[i]=sc.nextInt();
+        }  
+      int sum=0;double average;
+      for(int i=0;i<x;i++)
+      {
+          sum=sum+marks[i];
+           }
+       average=sum/x;
+       System.out.println("the final results");
+       System.out.println("total marks= "+sum);
+       System.out.println("average mark= "+average);
+       if (average >= 90) 
+       {
+             System.out.println("grade= A+");
+        } 
+        else if (average >= 80) 
+        {
+            System.out.println("grade= A");
+        } 
+        else if (average >= 70) 
+        {
+            System.out.println("grade= B+");
+        } 
+        else if (average >= 60) 
+        {
+            System.out.println("grade= C");
+        } 
+        else if (average >= 50)
+        {
+            System.out.println("grade= D");
+        } 
+        else 
+        {
+            System.out.println("grade= F");
+    }
+}
+}
