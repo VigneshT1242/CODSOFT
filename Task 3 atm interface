@@ -1,0 +1,108 @@
+import java.util.Scanner;
+class BankAccount  
+    {
+    public double balance;
+     public BankAccount(double initialBalance)
+     {
+        balance = initialBalance;
+    }
+    public void deposit(double amount)
+    {
+        if (amount > 0)
+        {
+            balance += amount;
+            System.out.println("deposit successful. new balance: " + balance);
+        } else 
+        {
+            System.out.println("invalid deposit amount");
+        }
+    }
+    public void withdraw(double amount)
+    {
+        if (amount > 0 && amount <= balance)
+        {
+            balance -= amount;
+            System.out.println("withdrawal successful. new balance: " + balance);
+        } else if (amount > balance) 
+        {
+            System.out.println("not enough balance");
+        } else
+        {
+            System.out.println("invalid withdrawal amount");
+        }
+    }
+    public double getBalance()
+    {
+        return balance;
+    }
+}
+public class ATM 
+{
+    public BankAccount account;
+    public Scanner scanner;
+    public ATM(BankAccount account) 
+    {
+        this.account = account;
+        scanner = new Scanner(System.in);
+    }
+    public void start() 
+    {
+        int choice;
+        do {
+            showMenu();
+            System.out.print("choose: ");
+            while (!scanner.hasNextInt())
+            {
+                System.out.print("enter a number: ");
+                scanner.next();
+            }
+            choice = scanner.nextInt();
+            if (choice == 1) 
+            {
+                deposit();
+            } else if (choice == 2) 
+            {
+                withdraw();
+            } else if (choice == 3)
+            {
+                checkBalance();
+            } else if (choice == 4)
+            {
+                System.out.println("thank you visit again");
+            } else 
+            {
+                System.out.println("wrong option");
+            }
+        } while (choice != 4);
+    }
+    public void showMenu() 
+    {
+        System.out.println("\nmenu:");
+        System.out.println("1. deposit");
+        System.out.println("2. withdraw");
+        System.out.println("3. check balance");
+        System.out.println("4. exit");
+    }
+    public void deposit()
+    {
+        System.out.print("amount to deposit: ");
+        double amount = scanner.nextDouble();
+        account.deposit(amount);
+    }
+    public void withdraw() 
+    {
+        System.out.print("amount to withdraw: ");
+        double amount = scanner.nextDouble();
+        account.withdraw(amount);
+    }
+    public void checkBalance() 
+    {
+        System.out.println("balance: " + account.getBalance());
+    }
+    public static void main(String[] args)
+    {
+        BankAccount userAccount = new BankAccount(500);
+        ATM atm = new ATM(userAccount);
+        atm.start();
+    }
+}
